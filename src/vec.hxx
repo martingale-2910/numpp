@@ -20,6 +20,7 @@ struct vec
 
     vec(std::valarray<arithmetic_t> const & data): data(data) {}
     vec(arithmetic_t x, std::size_t i): data(std::valarray<arithmetic_t>(x, i)) {}
+    vec(std::size_t i): data(std::valarray<arithmetic_t>((arithmetic_t) 0, i)) {}
     vec(vec<o, arithmetic_t> const & other): data(other.data) {}
     vec(vec<coorientation, arithmetic_t> const & other): data(other.data) {}
 
