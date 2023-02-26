@@ -29,6 +29,17 @@ struct vec
     vec<o, arithmetic_t> operator[](vec<o, bool> const & b) const { return vec<o, arithmetic_t>((this->data)[b.data]); }
     arithmetic_t max() const { return (this->data).max(); }
     arithmetic_t min() const { return (this->data).min(); }
+
+    template<typename Fn, typename arithmetic_t2 = typename std::result_of<Fn(arithmetic_t)>::type, std::enable_if_t<std::is_arithmetic<arithmetic_t2>::value, bool> = true>
+    vec<o, arithmetic_t2> apply(Fn const & fn) const
+    {
+        std::valarray<arithmetic_t2> res(this->size());
+        for (std::size_t i = 0; i < this->size(); ++i)
+        {
+            res[i] = fn(this->data[i]);
+        }
+        return res;
+    }
 };
 
 template<typename arithmetic_t, std::enable_if_t<std::is_arithmetic<arithmetic_t>::value, bool> = true>

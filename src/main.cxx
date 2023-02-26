@@ -21,5 +21,8 @@ int main(int argc, char** argv)
     std::cout << log(rvd) << std::endl;
     std::cout << ceil(rvd) << std::endl;
     std::cout << floor(rvd) << std::endl;
+    auto c = 3.14;
+    auto fn = [c](auto x){ return x + c; };
+    std::cout << rvd.apply(fn) << std::endl;
     return 0;
 }   
