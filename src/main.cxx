@@ -7,7 +7,11 @@ int main(int argc, char** argv)
     auto cvd = cvecd(std::valarray<double>{0.0, 1.1, 2.2, 3.3, 4.4});
     auto rvb = rvd > 1.0;
     std::cout << rvb << std::endl;
+    std::cout << rvecd(3.0, 10) << std::endl;
+    std::cout << rvecd(10) << std::endl;
+    std::cout << rvecd(cvd) << std::endl;
     std::cout << rvd[rvb] << std::endl;
+    std::cout << rvd[(rvd > 0) ^ (rvd < 4)] << std::endl;
     std::cout << rvd.transpose() << std::endl;
     std::cout << ((((2.0*rvd)/2.0)+1)-1) << std::endl;
     std::cout << 3.0/rvd << std::endl;

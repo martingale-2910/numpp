@@ -202,12 +202,51 @@ vec<o, bool> operator!=(vec<o, arithmetic_t1> const & v1, vec<o, arithmetic_t2> 
     return vec<o, bool>(v1.data != v2.data);
 }
 
+template<Orientation o, typename arithmetic_t1, typename arithmetic_t2, enable_if_all<std::is_arithmetic, arithmetic_t1, arithmetic_t2> = true>
+vec<o, bool> operator&&(vec<o, arithmetic_t1> const & v, arithmetic_t2 d) { return vec<o, bool>(v.data && d); }
+
+template<Orientation o, typename arithmetic_t1, typename arithmetic_t2, enable_if_all<std::is_arithmetic, arithmetic_t1, arithmetic_t2> = true>
+vec<o, bool> operator&&(arithmetic_t2 d, vec<o, arithmetic_t1> const & v) { return vec<o, bool>(d && v.data); }
+
+template<Orientation o, typename arithmetic_t1, typename arithmetic_t2, enable_if_all<std::is_arithmetic, arithmetic_t1, arithmetic_t2> = true>
+vec<o, bool> operator&&(vec<o, arithmetic_t1> const & v1, vec<o, arithmetic_t2> const & v2)
+{
+    assert(v1.size() == v2.size());
+    return vec<o, bool>(v1.data && v2.data);
+}
+
+template<Orientation o, typename arithmetic_t1, typename arithmetic_t2, enable_if_all<std::is_arithmetic, arithmetic_t1, arithmetic_t2> = true>
+vec<o, bool> operator||(vec<o, arithmetic_t1> const & v, arithmetic_t2 d) { return vec<o, bool>(v.data || d); }
+
+template<Orientation o, typename arithmetic_t1, typename arithmetic_t2, enable_if_all<std::is_arithmetic, arithmetic_t1, arithmetic_t2> = true>
+vec<o, bool> operator||(arithmetic_t2 d, vec<o, arithmetic_t1> const & v) { return vec<o, bool>(d || v.data); }
+
+template<Orientation o, typename arithmetic_t1, typename arithmetic_t2, enable_if_all<std::is_arithmetic, arithmetic_t1, arithmetic_t2> = true>
+vec<o, bool> operator||(vec<o, arithmetic_t1> const & v1, vec<o, arithmetic_t2> const & v2)
+{
+    assert(v1.size() == v2.size());
+    return vec<o, bool>(v1.data || v2.data);
+}
+
+template<Orientation o, typename arithmetic_t1, typename arithmetic_t2, enable_if_all<std::is_arithmetic, arithmetic_t1, arithmetic_t2> = true>
+vec<o, bool> operator^(vec<o, arithmetic_t1> const & v, arithmetic_t2 d) { return vec<o, bool>(v.data ^ d); }
+
+template<Orientation o, typename arithmetic_t1, typename arithmetic_t2, enable_if_all<std::is_arithmetic, arithmetic_t1, arithmetic_t2> = true>
+vec<o, bool> operator^(arithmetic_t2 d, vec<o, arithmetic_t1> const & v) { return vec<o, bool>(d ^ v.data); }
+
+template<Orientation o, typename arithmetic_t1, typename arithmetic_t2, enable_if_all<std::is_arithmetic, arithmetic_t1, arithmetic_t2> = true>
+vec<o, bool> operator^(vec<o, arithmetic_t1> const & v1, vec<o, arithmetic_t2> const & v2)
+{
+    assert(v1.size() == v2.size());
+    return vec<o, bool>(v1.data ^ v2.data);
+}
+
 // Stream operations
 
 template<Orientation o, typename arithmetic_t, enable_if_all<std::is_arithmetic, arithmetic_t> = true>
-std::ostream& operator<<(std::ostream& os, vec<o, arithmetic_t> const & vec)
+std::ostream& operator<<(std::ostream& os, vec<o, arithmetic_t> const & v)
 {
-    auto acc_fn = [orientation=vec.orientation](std::string &acc, arithmetic_t const &elem)
+    auto acc_fn = [orientation=v.orientation](std::string &acc, arithmetic_t const &elem)
     {
         if (orientation == Orientation::ROW)
         {
@@ -220,13 +259,13 @@ std::ostream& operator<<(std::ostream& os, vec<o, arithmetic_t> const & vec)
     };
 
     std::string joined_inputs = std::accumulate(
-            std::begin(vec.data), 
-            std::end(vec.data), 
+            std::begin(v.data), 
+            std::end(v.data), 
             std::string(), 
             acc_fn
     );
 
-    vec.orientation == Orientation::ROW ? os << "[" << joined_inputs << "]" : os << joined_inputs;
+    v.orientation == Orientation::ROW ? os << "[" << joined_inputs << "]" : os << joined_inputs;
 
     return os;
 }
