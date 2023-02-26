@@ -19,7 +19,9 @@ struct vec
     static constexpr Orientation coorientation = o == Orientation::ROW ? Orientation::COL : Orientation::ROW;
 
     vec(std::valarray<arithmetic_t> const & data): data(data) {}
+    vec(arithmetic_t x, std::size_t i): data(std::valarray<arithmetic_t>(x, i)) {}
     vec(vec<o, arithmetic_t> const & other): data(other.data) {}
+    vec(vec<coorientation, arithmetic_t> const & other): data(other.data) {}
 
     std::size_t size() const { return this->data.size(); }
     vec<coorientation, arithmetic_t> transpose() const { return vec<coorientation, arithmetic_t>(this->data); }
@@ -228,7 +230,7 @@ std::ostream& operator<<(std::ostream& os, vec<o, arithmetic_t> const & vec)
     return os;
 }
 
-// Math overloards
+// Math overloads
 
 template<Orientation o, typename arithmetic_t1, enable_if_all<std::is_arithmetic, arithmetic_t1> = true>
 vec<o, arithmetic_t1> abs(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(std::abs(v.data)); }
