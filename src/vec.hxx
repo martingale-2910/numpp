@@ -273,24 +273,45 @@ std::ostream& operator<<(std::ostream& os, vec<o, arithmetic_t> const & v)
 // Math overloads
 
 template<Orientation o, typename arithmetic_t1, enable_if_all<std::is_arithmetic, arithmetic_t1> = true>
-vec<o, arithmetic_t1> abs(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(std::abs(v.data)); }
+vec<o, arithmetic_t1> abs(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(abs(v.data)); }
 
 template<Orientation o, typename arithmetic_t1, typename arithmetic_t2, enable_if_all<std::is_arithmetic, arithmetic_t1, arithmetic_t2> = true>
-vec<o, arithmetic_t1> pow(vec<o, arithmetic_t1> const & v, arithmetic_t2 d) { return vec<o, arithmetic_t1>(std::pow(v.data, d)); }
+vec<o, arithmetic_t1> pow(vec<o, arithmetic_t1> const & v, arithmetic_t2 d) { return vec<o, arithmetic_t1>(pow(v.data, d)); }
 
 template<Orientation o, typename arithmetic_t1, enable_if_all<std::is_arithmetic, arithmetic_t1> = true>
-vec<o, arithmetic_t1> sqrt(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(std::sqrt(v.data)); }
+vec<o, arithmetic_t1> sqrt(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(sqrt(v.data)); }
 
 template<Orientation o, typename arithmetic_t1, enable_if_all<std::is_arithmetic, arithmetic_t1> = true>
-vec<o, arithmetic_t1> exp(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(std::exp(v.data)); }
+vec<o, arithmetic_t1> exp(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(exp(v.data)); }
 
 template<Orientation o, typename arithmetic_t1, enable_if_all<std::is_arithmetic, arithmetic_t1> = true>
-vec<o, arithmetic_t1> log(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(std::log(v.data)); }
+vec<o, arithmetic_t1> log(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(log(v.data)); }
 
 template<Orientation o, typename arithmetic_t1, enable_if_all<std::is_arithmetic, arithmetic_t1> = true>
 vec<o, arithmetic_t1> ceil(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(v.data.apply(std::ceil)); }
 
 template<Orientation o, typename arithmetic_t1, enable_if_all<std::is_arithmetic, arithmetic_t1> = true>
 vec<o, arithmetic_t1> floor(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(v.data.apply(std::floor)); }
+
+template<Orientation o, typename arithmetic_t1, enable_if_all<std::is_arithmetic, arithmetic_t1> = true>
+vec<o, arithmetic_t1> sin(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(sin(v.data)); }
+
+template<Orientation o, typename arithmetic_t1, enable_if_all<std::is_arithmetic, arithmetic_t1> = true>
+vec<o, arithmetic_t1> cos(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(cos(v.data)); }
+
+template<Orientation o, typename arithmetic_t1, enable_if_all<std::is_arithmetic, arithmetic_t1> = true>
+vec<o, arithmetic_t1> tan(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(tan(v.data)); }
+
+template<Orientation o, typename arithmetic_t1, enable_if_all<std::is_arithmetic, arithmetic_t1> = true>
+vec<o, arithmetic_t1> sinh(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(sinh(v.data)); }
+
+template<Orientation o, typename arithmetic_t1, enable_if_all<std::is_arithmetic, arithmetic_t1> = true>
+vec<o, arithmetic_t1> cosh(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(cosh(v.data)); }
+
+template<Orientation o, typename arithmetic_t1, enable_if_all<std::is_arithmetic, arithmetic_t1> = true>
+vec<o, arithmetic_t1> tanh(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(tanh(v.data)); }
+
+template<Orientation o, typename arithmetic_t1, enable_if_all<std::is_arithmetic, arithmetic_t1> = true>
+vec<o, arithmetic_t1> erf(vec<o, arithmetic_t1> const & v) { return vec<o, arithmetic_t1>(v.data.apply(std::erf)); }
 
 #endif // VEC_HXX
